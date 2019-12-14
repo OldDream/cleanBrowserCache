@@ -1,5 +1,5 @@
 # cleanBrowserCache
-**在windows下似乎无效，原因不明，macos正常**
+**在windows下无效，无法替换html中的对应字符串，原因不明，macos10.14正常**
 
 master分支使用gulp-rev-rewrite
 
