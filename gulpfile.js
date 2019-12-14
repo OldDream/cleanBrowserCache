@@ -115,4 +115,4 @@ task('clean', () =>
 gulp.task('default', series('clean', 'copy', 'revision', 'rewrite'));
 
 gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'toES5min', 'revision', 'rewrite', 'rewriteLibs'));
-gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'toES5min','revision', 'rewrite', 'rewriteLibs'));
+gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'toES5min', 'revision', 'rewrite', 'rewriteLibs'));
