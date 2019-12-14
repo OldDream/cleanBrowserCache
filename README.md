@@ -18,7 +18,7 @@ npm run build-dev 编译到测试环境
 
 src文件夹内是若干目录，目录中是页面相关文件，libs文件夹中是公用文件。
 
-编译输出到根目录下dist文件夹。
+编译输出到根目录下dist文件夹。带有压缩和ES6转ES5
 
 具体参考gulpfile.js。
 
