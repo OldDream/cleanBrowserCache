@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control"content="no-cache, must-revalidate"/>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../libs/css/enjoy.css?v=2">
+    <link rel="stylesheet" href="../libs/layui-v2.3.0-rc1/layui/css/layui.css">
+    <link rel="icon" href="https://pic-oss.lingkehudong.com/images/logo/173-137.png">
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.core.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <title>商品详情</title> 
+    <script>
+        var defaultWidth = window.screen.width ? window.screen.width : 375;
+        document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+        window.onload = function () {
+            window.onresize = function () {
+                document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="main">
+            <div class="banner swiper-container">
+                <ul class="swiper-wrapper">
+                </ul>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="goodsTitle">
+               
+            </div>
+            
+            <div class="pickWeek">
+            
+            </div>
+            <div class="tradeDescription">
+                <ul>
+                    <li>
+                        <h1>商品详情</h1>
+                        <p class="eventDetail ql-editor"></p>
+                    </li>
+                </ul>
+            </div> 
+        </div>
+        <div class="bottomBtn">
+            <dl class="showCustomService">
+                <dt><img src="./imgs/customService.png" alt=""></dt>
+                <dd>联系客服</dd>
+            </dl>
+            <dl class="intoChart">
+                <dt><img src="./imgs/shopCarBtn.png" alt=""></dt>
+                <dd>购物车</dd>
+            </dl>
+            <button class="addCartBtn">加入购物车</button>
+            <button class="shop">立即购买</button>
+        </div>
+        <div class="flghtBottomBtn">
+            <dl class="showCustomService">
+                <dt><img src="./imgs/customService.png" alt=""></dt>
+                <dd>联系客服</dd>
+            </dl>
+            <button class="flghtBtn">拼团购买</button>
+        </div>
+        <div class="alertMsg"></div>
+        <div class="contWrap">
+            <!-- 联系客服 -->
+            <div class="customService">
+                <img src="./imgs/customServiceClose.png" id="customServiceClose">
+                <img src="./imgs/customServiceTitleImg.png" id="customServiceTitleImg">
+                <h1>尊敬的小主</h1>
+                <p>联系客服需关注应声互动微信服务号，在菜单栏中点击联系客服在线为您服务哦！</p>
+                <div class="weixin">
+                    微信服务号：<b id="codeNum">lkhd2017</b>
+                </div>
+                <button class="copyBtn" data-clipboard-text="lkhd2017">复制</button>
+            </div>
+            <!-- 加入购物车 -->
+            <div class="addCart">
+                <img src="./imgs/shopCartClose.png" id="shopCartClose">
+                <dl>
+                    <dt><img id="thisGoods"></dt>
+                    <dd>
+                        <p class="thisGoodsMoney"></p>
+                        <p class="thisGoodsMaxNum">已售：<b id="goodsMaxNum"></b>件</p>
+                    </dd>
+                </dl>
+                <div class="commodityClassification">
+                    <h1>商品分类</h1>
+                    <div class="typeList">
+                    </div>
+                </div>
+                <div class="goodsNum">
+                    <span>数量</span>
+                    <div class="numChange">
+                        <b class="numSubtract">-</b>
+                        <span id="goodsNum">1</span>
+                        <b class="numAdd add">+</b>
+                    </div>
+                </div>
+                <div class="addCartRight">
+                    <button>确定</button>
+                </div>
+            </div>
+            <div class='wechatAlert'>
+                <img src='./imgs/lotteryMarkClose.png' class='lotteryWechatBtn'>
+                <b>尊敬的小主: </b>
+                如您需要购买我们的产品，请你优先关注我们的微信服务号 或者下载我们的  应声互动APP  在APP中进行购买哦！<br>
+                <i>点击下方复制链接按钮，在浏览器中打开即可下载安装</i>
+                <button class='copyBtn' data-clipboard-text='https://app-fd3al3.openinstall.io/channel-landing?channelCode=113'>复制链接</button>
+            </div>
+        </div>
+        <div class="loading">
+            <img src="./imgs/loading.gif" alt="">
+        </div>
+        <div class="falseAjax">
+            <img src="./imgs/falseAjax.png" alt="">
+        </div>
+    </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="../libs/js/jquery.min.js"></script>
+    <script src="../libs/layui-v2.3.0-rc1/layui/layui.all.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script src="//constant-info.lingkehudong.com/js/protocol.new.js"></script>
+    <script src="//constant-info.lingkehudong.com/skipProtocol/skip-protocol.min.js"></script>
+    <script src="../libs/common.js?v=2"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

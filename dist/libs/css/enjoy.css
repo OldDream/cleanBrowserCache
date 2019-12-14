@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    /* 点击背景 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+}
+.textHide{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+html,body{
+    height: 100%;
+}
+body{
+    position: relative;
+}
+.main{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+h1,h2,h3,h4,h5{
+    font-weight:normal;
+}
+ol,ul,li{
+    list-style: none;
+}
+img{
+    vertical-align:top;
+}
+.center{
+   text-align: center;
+   margin-left: 50%; 
+   transform: translateX(-50%);
+}
+a{
+    text-decoration:none;
+    cursor:pointer;
+    -webkit-touch-callout:none;
+}
+a:focus,a:active{
+    outline:0
+}
+em,i{
+    font-style: normal;
+}
+button{
+    border: none;
+    background: none;
+    outline: 0;
+    /* 可解决ios 无法点击问题*/
+    cursor: pointer; 
+}
+.wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background:rgba(0, 0, 0, 0.7);
+}
+.loading,.falseAjax{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: #fff;
+    display: none;
+}
+.loading img,.falseAjax img{
+    width:40%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+}
+.loading img{
+    width: 20%;
+}
+.falseAjax{
+    cursor: pointer;
+    display: none;
+}
+.layui-layer-dialog .layui-layer-title{
+    padding: 0;
+    text-align: center;
+}
+.layui-layer-dialog .layui-layer-btn{
+    display: flex;
+}
+
+.layui-layer-dialog .layui-layer-btn a{
+    width: 40%;
+    margin: 0 5%;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+}

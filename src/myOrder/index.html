@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control"content="no-cache, must-revalidate"/>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/amazeui.css">
+    <link rel="stylesheet" href="../libs/css/enjoy.css?v=2">
+    <link rel="icon" href="http://pic-oss.lingkehudong.com/images/logo/173-137.png">
+    <title>我的订单</title> 
+    <script>
+        var defaultWidth = window.screen.width ? window.screen.width : 375;
+        document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+        window.onload = function () {
+            window.onresize = function () {
+                document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div data-am-widget="tabs"
+        class="am-tabs am-tabs-d2"
+            >
+        <ul class="am-tabs-nav am-cf am-nav-justify">
+            <li class="am-active"><a href="[data-tab-panel-0]">全部订单</a></li>
+            <li class=""><a href="[data-tab-panel-1]">待付款</a></li>
+            <li class=""><a href="[data-tab-panel-2]">待发货</a></li>
+            <li class=""><a href="[data-tab-panel-3]">已发货</a></li>
+            <li class=""><a href="[data-tab-panel-4]">已完成</a></li>
+        </ul>
+        <div class="am-tabs-bd">
+            <div data-tab-panel-0 class="am-tab-panel am-active tab0">
+            </div>
+            <div data-tab-panel-1 class="am-tab-panel tab1">
+                
+            </div>
+            <div data-tab-panel-2 class="am-tab-panel tab2">
+                
+            </div>
+            <div data-tab-panel-3 class="am-tab-panel tab3">
+                
+            </div>
+            <div data-tab-panel-4 class="am-tab-panel tab4">
+                
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="alertMsg"></div>
+    <div class="wrap">
+        <div class="paymentTyp">
+            <span id="submitOrderClose"></span>
+            <div class="typeZFB">
+                <img src="./imgs/ZFB.png" alt=""> 支付宝支付
+            </div>
+            <div class="typeWX">
+            <img src="./imgs/WX.png" alt=""> 微信支付
+            </div>
+        </div>
+        <div class="customService">
+            <img src="./imgs/customServiceClose.png" id="customServiceClose">
+            <img src="./imgs/customServiceTitleImg.png" id="customServiceTitleImg">
+            <h1>尊敬的小主</h1>
+            <p>您的订单我们已经收到，我们将尽快安排仓库进行发货，你可以到我的订单中查看订单详情哦，您还可以添加我们的客服小姐姐进行询问哦！</p>
+            <div class="weixin">
+                微信服务号：<b id="codeNum">lkhd2017</b>
+            </div>
+            <button class="copyBtn" data-clipboard-text="lkhd2017">复制</button>
+        </div>
+        <div class="customServiceFlght">
+            <img src="./imgs/customServiceClose.png" id="customServiceFlghtClose">
+            <img src="./imgs/customServiceFlghtTitleImg.png" id="customServiceTitleImg">
+            <p class="remainingTime">拼团剩余时间：<span id="remainingTime"></span></p>
+            <h1>尊敬的小主</h1>
+            <p>您的商品正在努力进行拼团中，请耐心等待，拼团不成功，您的资金将会原路返回到您的账户中，您可以邀请您的好友来一起参与拼团哦~</p>
+            <button class="shareBtn">邀请好友拼团</button>
+        </div>
+        <div class="orderNotPaid">
+            <h1>尊敬的小主</h1>
+            <p>您的订单将在2个小时后未支付被取消，请您尽快完成支付，好货不等人！</p>
+            <div class="btnList">
+                <button class="continuePay">继续支付</button>
+                <button class="leave">确认离开</button>
+            </div>
+        </div>
+    </div>
+    <div class="loading">
+        <img src="./imgs/loading.gif" alt="">
+    </div>
+    <div class="falseAjax">
+        <img src="./imgs/falseAjax.png" alt="">
+    </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="../libs/js/jquery.min.js"></script>
+    <script src="./js/amazeui.js" async defer></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js" async defer></script>
+    <script src="//constant-info.lingkehudong.com/js/protocol.min.3.0.js"></script>
+    <script src="../libs/common.js?v=2"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

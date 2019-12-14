@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control"content="no-cache, must-revalidate"/>
+    <link rel="stylesheet" href="./css/style-710af9c861.css">
+    <link rel="stylesheet" href="../libs/css/enjoy.css?v=2">
+    <link rel="icon" href="http://pic-oss.lingkehudong.com/images/logo/173-137.png">
+    <title>订单确认</title> 
+    <script>
+        var defaultWidth = window.screen.width ? window.screen.width : 375;
+        document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+        window.onload = function () {
+            window.onresize = function () {
+                document.documentElement.style.fontSize = (document.documentElement.clientWidth ? document.documentElement.clientWidth : defaultWidth) / 16 + 'px';
+            };
+        } 
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="address">
+        </div>
+        <div class="goodsList">
+        </div>
+    </div>
+    <div class="submitOrder">
+        <div class="goodsSum">
+            <div class="goodsNum">
+                共<i></i>件
+            </div>
+            <div class="preferentialPrice">
+                优惠: <b class="preferential">0</b>
+            </div>
+            <span>合计:<b class="money">0</b></span>
+        </div>
+        <button id="submitOrderBtn">提交订单</button>
+    </div>
+    <div class="alertMsg"></div>
+    <div class="wrap">
+        <div class="paymentTyp">
+            <span id="submitOrderClose"></span>
+            <div class="typeZFB">
+                <img src="./imgs/ZFB.png" alt=""> 支付宝支付
+            </div>
+            <div class="typeWX">
+            <img src="./imgs/WX.png" alt=""> 微信支付
+            </div>
+        </div>
+        <div class="customService">
+            <img src="./imgs/customServiceClose.png" id="customServiceClose">
+            <img src="./imgs/customServiceTitleImg.png" id="customServiceTitleImg">
+            <h1>尊敬的小主</h1>
+            <p>您的订单我们已经收到，我们将尽快安排仓库进行发货，您可以到我的订单中查看订单详情哦，关注应声互动微信服务号，在菜单栏中点击联系客服在线为您服务哦！</p>
+            <div class="weixin">
+                微信服务号：<b id="codeNum">lkhd2017</b>
+            </div>
+            <button class="copyBtn" data-clipboard-text="lkhd2017">复制</button>
+        </div>
+        <div class="orderNotPaid">
+            <h1>尊敬的小主</h1>
+            <p>您的订单将在2个小时后未支付被取消，请您尽快完成支付，好货不等人！</p>
+            <div class="btnList">
+                <button class="leave">确认离开</button>
+                <button class="continuePay">继续支付</button>
+            </div>
+        </div>
+        <div class="coupon">
+            <img src="./imgs/submitOrderClose.png" id="useCouponClose">
+            <div class="couponList">
+                    <div class="available">
+                        <h1>可使用优惠券</h1>
+                        <div class="orderList">
+
+                        </div>
+                    </div>
+                    <div class="notAvailable">
+                        <h1>不可使用优惠券</h1>
+                        <div class="orderList"></div>
+                    </div>
+            </div>
+            <button class="noneAvailable">不使用优惠券</button>
+        </div>
+    </div>
+    <div class="loading">
+        <img src="./imgs/loading.gif" alt="">
+    </div>
+    <div class="addressWrap">
+        <div class="addressCont">
+            <h1>我的地址</h1>
+            <img src="./imgs/submitOrderClose.png" class="addressContClose">
+            <div class="addressList">
+            </div>
+            <button  class="addAddress">添加新地址</button>
+        </div>
+    </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="../libs/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
+    <script src="//constant-info.lingkehudong.com/js/protocol.min.3.0.js"></script>    
+    <script src="../libs/common.js?v=2"></script>
+    <script src="./js/index2-c28d757126.js"></script>
+</body>
+</html>

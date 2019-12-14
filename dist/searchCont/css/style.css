@@ -1,0 +1,206 @@
+@charset "UTF-8";
+.searchBox {
+  display: flex;
+  padding-left: 0.64rem;
+  padding-top: 0.42667rem;
+  align-items: center;
+  margin-bottom: 1.06667rem;
+}
+
+.searchBox .searchIpt {
+  flex: 1;
+  position: relative;
+  height: 1.70667rem;
+  line-height: 1.70667rem;
+  border-radius: 0.85333rem;
+  background-color: #F2F4F4;
+  display: flex;
+  align-items: center;
+  padding-left: 0.64rem;
+  overflow: hidden;
+}
+
+.searchBox .searchIpt p {
+  position: absolute;
+  color: #999999;
+  font-size: 0.68267rem;
+  pointer-events: none;
+}
+
+.searchBox .searchIpt input {
+  height: 80%;
+  background-color: #F2F4F4;
+  font-size: 0.68267rem;
+  outline: none;
+  border: 0;
+  width: 85%;
+}
+
+.searchBox .searchBtn {
+  font-size: 0.768rem;
+  color: #FF7645;
+  padding-left: 0.55467rem;
+  padding-right: 0.64rem;
+}
+
+.searchHistory {
+  padding-left: 0.61867rem;
+}
+
+.searchHistory h1 {
+  font-size: 0.68267rem;
+  color: #333333;
+  font-weight: 500;
+}
+
+.searchHistory h1 span {
+  width: 0.768rem;
+  height: 0.81067rem;
+  background-image: url("../imgs/clearBtn.png");
+  background-size: 100% 100%;
+  float: right;
+  margin-top: 0.27733rem;
+  margin-right: 0.64rem;
+}
+
+.searchHistory .searchHistoryList {
+  margin-top: 0.21333rem;
+}
+
+.searchHistory .searchHistoryList span {
+  background-color: #F2F4F4;
+  border-radius: 0.704rem;
+  padding: 0.40533rem 0.85333rem;
+  font-size: 0.59733rem;
+  color: #666666;
+  margin-top: 0.42667rem;
+  display: inline-block;
+  margin-right: 0.42667rem;
+}
+
+.clearIpt {
+  width: 0.768rem;
+  height: 0.768rem;
+  background-image: url("../imgs/cha.png");
+  background-size: 100% 100%;
+  margin-left: 0.53333rem;
+  display: inline-block;
+  cursor: pointer;
+  display: none;
+}
+
+.searchList {
+  display: none;
+}
+
+.searchList dl {
+  width: 14.76267rem;
+  border-radius: 0.42667rem;
+  display: flex;
+  border: #e6e6e6 solid 0.02133rem;
+  margin-bottom: 0.768rem;
+  overflow: hidden;
+  margin-left: 0.61867rem;
+}
+
+.searchList dl dd {
+  flex: 1;
+  margin-left: 0.66133rem;
+  padding-top: 0.64rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0.64rem;
+}
+
+.searchList dl dt {
+  position: relative;
+}
+
+.searchList dl dt span {
+  position: absolute;
+  width: 1.36533rem;
+  height: 1.68533rem;
+  line-height: 0.87467rem;
+  font-size: 0.512rem;
+  text-align: center;
+  top: 0rem;
+  left: 0.42667rem;
+  background-size: 100% 100%;
+  display: none;
+}
+
+.searchList dl dt .redBg {
+  background-image: url("../imgs/twoImg.png");
+  display: inline-block;
+}
+
+.searchList dl dt .yellowBg {
+  background-image: url("../imgs/thrImg.png");
+  display: inline-block;
+}
+
+.searchList dl dt .blueBg {
+  background-image: url("../imgs/fivImg.png");
+  display: inline-block;
+}
+
+.searchList dl img {
+  width: 5.03467rem;
+  height: 5.03467rem;
+  border: 0.02133rem solid #e6e6e6;
+}
+
+.searchList dl h1 {
+  color: #333333;
+  font-size: 0.68267rem;
+  width: 8.14933rem;
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+
+.searchList dl h1 span {
+  display: inline-block;
+  text-align: center;
+  color: #ffffff;
+  background-color: #F74B57;
+  line-height: 0.68267rem;
+  font-size: 0.512rem;
+  border-radius: 0.128rem;
+  margin-right: 0.21333rem;
+  padding: 0.08533rem 0.21333rem;
+}
+
+.searchList dl p span {
+  color: #F74B57;
+  font-size: 0.768rem;
+  font-weight: 500;
+}
+
+.searchList dl p span:before {
+  content: '￥';
+}
+
+.searchList dl p b {
+  color: #999999;
+  font-size: 0.55467rem;
+  font-weight: 400;
+}
+
+.searchNomal {
+  text-align: center;
+  display: none;
+}
+
+.searchNomal img {
+  width: 9.472rem;
+  margin-top: 4.8rem;
+}
+
+.searchNomal h1 {
+  color: #7D7D7D;
+  font-size: 0.59733rem;
+  margin-top: 0.85333rem;
+}

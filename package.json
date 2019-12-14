@@ -1,0 +1,19 @@
+{
+  "name": "preventcache",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^5.1.0",
+    "glob": "^7.1.6",
+    "gulp": "^4.0.2",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-rewrite": "^2.0.0",
+    "merge-stream": "^2.0.0"
+  }
+}

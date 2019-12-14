@@ -1,0 +1,135 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+body .main {
+  flex: 1;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+.available, .notAvailable {
+  padding: 0 0.64rem;
+}
+
+.available > h1, .notAvailable > h1 {
+  color: #333333;
+  font-size: 0.68267rem;
+  font-weight: bold;
+  line-height: 2.06933rem;
+}
+
+.availableList {
+  width: 14.72rem;
+  height: 5.12rem;
+  background-image: url(../imgs/couponBg.png);
+  background-size: 100% 100%;
+  display: flex;
+}
+
+.availableList dl {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.availableList dt {
+  text-align: center;
+  padding-left: 0.128rem;
+}
+
+.availableList dt img {
+  width: 2.24rem;
+  border-radius: 50%;
+  border: 0.04267rem solid #CECECE;
+}
+
+.availableList dd {
+  color: #fff;
+  background-color: #FE7549;
+  width: 2.24rem;
+  line-height: 0.704rem;
+  font-size: 0.46933rem;
+  text-align: center;
+  margin-top: 0.36267rem;
+}
+
+.availableList .couponMsg {
+  flex: 3;
+  padding-top: 0.704rem;
+  padding-left: 0.46933rem;
+}
+
+.availableList .couponMsg h1 {
+  color: #333333;
+  font-size: 0.68267rem;
+  line-height: 1.49333rem;
+}
+
+.availableList .couponMsg h1 b {
+  color: #FFA42E;
+  font-size: 0.59733rem;
+  float: right;
+  margin-right: 1.06667rem;
+  font-weight: 400;
+}
+
+.availableList .couponMsg p {
+  color: #B0B0B0;
+  font-size: 0.55467rem;
+  line-height: 0.896rem;
+}
+
+.notAvailable dd {
+  background-color: #B0B0B0;
+}
+
+.available .availableList {
+  margin-bottom: 0.66133rem;
+}
+
+.thisCoupon {
+  display: inline-block;
+  width: 0.704rem;
+  height: 0.704rem;
+  border-radius: 50%;
+  border: 0.064rem solid #D9D9D9;
+  box-sizing: border-box;
+  transform: translateY(0.10667rem);
+  margin-left: 0.21333rem;
+}
+
+.confirmCoupon {
+  height: 2.09067rem;
+  display: flex;
+}
+
+.confirmCoupon .couponMsg {
+  flex: 1;
+  align-items: center;
+  border-top: 0.04267rem solid #EEEEEE;
+  font-size: 0.59733rem;
+  color: #333333;
+  padding-left: 0.66133rem;
+  line-height: 2.09067rem;
+}
+
+.confirmCoupon button {
+  width: 5.67467rem;
+  height: 2.09067rem;
+  color: #fff;
+  font-size: 0.68267rem;
+  background-color: #FFA42E;
+}
+
+.confirmThis {
+  display: inline-block;
+  width: 0.704rem;
+  height: 0.704rem;
+  background-image: url("../imgs/confirmThis.png");
+  background-size: 100% 100%;
+  border: 0 !important;
+}
