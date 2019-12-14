@@ -44,6 +44,22 @@ libs目录下也有
 ./css/style.css
 ```
 
-则在html文件中替换时**无法区分！！！**这需要特别注意。其实查看输出的rev-manifest.json文件就能知道原因,
+则在html文件中替换时**无法区分**这需要特别注意。其实查看输出的rev-manifest.json文件就能知道原因,
+
+```json
+// rev-manifest.json in Main/
+{
+  "css/style.css": "css/style-60182581b3.css",
+  "css/style.min.css": "css/style-4cd6137236.min.css",
+  "js/index.js": "js/index-e230776911.js"
+}
+// rev-manifest.json in libs/
+{
+  "common.js": "common-c68f896553.js",
+  "css/enjoy.css": "css/enjoy-1aa8382a37.css",
+  "js/jquery.lazyload.js": "js/jquery-ed5e2f5cf4.lazyload.js",
+  "js/jquery.min.js": "js/jquery-a09e13ee94.min.js",
+}
+```
 
 输出结果是不包含当前目录名称的，如果包含了当前目录名称，在html中的替换也出现为问题。因为在html中的引用不包含当前目录名称，而是采用'./'代替。
