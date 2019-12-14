@@ -1,7 +1,8 @@
 const gulp = require('gulp');
 const { series, watch, task, dest, src } = require('gulp');
 const rev = require('gulp-rev');
-const revRewrite = require('gulp-rev-rewrite');
+// const revRewrite = require('gulp-rev-rewrite');
+const revCollector = require('gulp-rev-collector');
 const del = require('del');
 const fs = require('fs');
 const path = require('path');
@@ -29,23 +30,29 @@ task('revision', (done) => {
   return merge(tasks);
 });
 
-task('rewrite', (done) => {
+task('rewriteStep1', (done) => {
   let folders = getFolders(sourcePath); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
     const manifest = src(sourcePath + `/${folder}/rev-manifest.json`);
-    return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
-      .pipe(revRewrite({ manifest }))
+    return gulp.src([path.join(sourcePath, folder, '/rev-manifest.json'), path.join(sourcePath, folder, '/**/*.html')])
+      .pipe(revCollector())
       .pipe(gulp.dest(sourcePath + `/${folder}`))
   });
 
+  return merge(tasks);
+});
+
+task('rewriteStep2', (done) => {
+  let folders = getFolders(sourcePath); // get folders
+  if (folders.length === 0) return done(); // nothing to do!
   let hanleLibs = folders.map((folder) => {
     const manifest = src(`dist/libs/rev-manifest.json`);
-    return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
-      .pipe(revRewrite({ manifest }))
+    return gulp.src(['dist/libs/rev-manifest.json',path.join(sourcePath, folder, '/**/*.html')])
+      .pipe(revCollector())
       .pipe(gulp.dest(sourcePath + `/${folder}`))
   });
-  return merge(tasks , hanleLibs);
+  return merge(hanleLibs);
 });
 
 task('copy', () =>
@@ -57,4 +64,4 @@ task('clean', () =>
   del(['./dist/*'])
 );
 
-gulp.task('default', series('clean', 'copy', 'revision', 'rewrite'));
+gulp.task('default', series('clean', 'copy', 'revision', 'rewriteStep1', 'rewriteStep2'));
