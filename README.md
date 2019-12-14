@@ -1,4 +1,5 @@
 # cleanBrowserCache
+**在windows下似乎无效，原因不明**
 
 为css、js文件添加hash，避免受上一版文件缓存的影响。
 ```
