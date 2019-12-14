@@ -6,6 +6,7 @@ const del = require('del');
 const fs = require('fs');
 const path = require('path');
 const merge = require('merge-stream');
+const mergeJson = require('gulp-merge-json');
 
 let sourcePath = 'dist';
 
@@ -20,7 +21,7 @@ task('revision', (done) => {
   let folders = getFolders(sourcePath); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
-    return gulp.src(path.join(sourcePath, folder, '/**/*.{css,js}'))
+    return gulp.src([path.join(sourcePath, folder, '/**/*.{css,js}'),'dist/libs/*.js', 'dist/libs/js/*.js','dist/libs/css/*.css'])
       .pipe(rev())
       .pipe(gulp.dest(sourcePath + `/${folder}`))
       .pipe(rev.manifest())
@@ -28,6 +29,18 @@ task('revision', (done) => {
   });
   return merge(tasks);
 });
+
+task('joinJSON', () => {
+  let folders = getFolders(sourcePath); // get folders
+  if (folders.length === 0) return done(); // nothing to do!
+  let tasks = folders.map((folder) => {
+    return gulp.src(['dist/libs/rev-manifest.json', path.join(sourcePath, folder, '/**/rev-manifest.json')])
+      .pipe(mergeJson())
+      // .pipe(gulp.dest(sourcePath + `/${folder}`))
+      .pipe(gulp.dest(sourcePath + `/${folder}/output`))
+  });
+  return merge(tasks);
+})
 
 
 task('rewrite', (done) => {
