@@ -7,7 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const merge = require('merge-stream');
 const replace = require('gulp-replace');
-
+const babel = require('gulp-babel');
+const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
 
 let sourcePath = 'dist-dev'; // dist-dev开发 dist-prod生产
 let ENV = 'dev'; // dev 开发 prod 生产
@@ -36,7 +38,7 @@ gulp.task('replaceWords', () => {
   return gulp.src(`./${sourcePath}/libs/common.js`)
     .pipe(replace('var pro = false;', replaceCommonjs))
     .pipe(replace('var pro = true;', replaceCommonjs))
-    .pipe(gulp.dest(`${sourcePath}/libs/`));
+    .pipe(dest(`${sourcePath}/libs/`));
 });
 
 task('setDev', done => {
@@ -52,15 +54,27 @@ task('setProd', done => {
   done()
 })
 
+// ES6转ES5
+gulp.task('toES5min', () =>
+  gulp.src(`${sourcePath}/**/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest(`${sourcePath}`))
+);
+
 task('revision', (done) => {
   let folders = getFolders(sourcePath); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
     return gulp.src([path.join(sourcePath, folder, '/**/*.{css,js}')])
       .pipe(rev())
-      .pipe(gulp.dest(sourcePath + `/${folder}`))
+      .pipe(dest(sourcePath + `/${folder}`))
       .pipe(rev.manifest())
-      .pipe(gulp.dest(sourcePath + `/${folder}`))
+      .pipe(dest(sourcePath + `/${folder}`))
   });
   return merge(tasks);
 });
@@ -72,7 +86,7 @@ task('rewrite', (done) => {
     const manifest = src(sourcePath + `/${folder}/rev-manifest.json`);
     return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
       .pipe(revRewrite({ manifest }))
-      .pipe(gulp.dest(sourcePath + `/${folder}`))
+      .pipe(dest(sourcePath + `/${folder}`))
   });
   return merge(tasks);
 });
@@ -84,14 +98,14 @@ task('rewriteLibs', (done) => {
     const manifest = src(`${sourcePath}/libs/rev-manifest.json`);
     return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
       .pipe(revRewrite({ manifest }))
-      .pipe(gulp.dest(sourcePath + `/${folder}`))
+      .pipe(dest(sourcePath + `/${folder}`))
   });
   return merge(hanleLibs);
 });
 
 task('copy', () =>
   gulp.src('src/**/*')
-    .pipe(gulp.dest(`${sourcePath}`)) // 将源文件拷贝到打包目录
+    .pipe(dest(`${sourcePath}`)) // 将源文件拷贝到打包目录
 );
 
 task('clean', () =>
@@ -100,5 +114,5 @@ task('clean', () =>
 
 gulp.task('default', series('clean', 'copy', 'revision', 'rewrite'));
 
-gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'revision', 'rewrite', 'rewriteLibs'));
-gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'revision', 'rewrite', 'rewriteLibs'));
+gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'toES5min', 'revision', 'rewrite', 'rewriteLibs'));
+gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'toES5min','revision', 'rewrite', 'rewriteLibs'));
