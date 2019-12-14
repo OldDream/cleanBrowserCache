@@ -5,6 +5,11 @@ master分支使用gulp-rev-rewrite
 
 gulp-rev-collector分支使用gulp-rev-collector
 
+```
+npm run build 编译到正式环境
+npm run build-dev 编译到测试环境
+```
+
 为css、js文件添加hash，避免受上一版文件缓存的影响。
 ```
 // 最终达成类似这样的效果
