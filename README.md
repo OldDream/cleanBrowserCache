@@ -7,7 +7,8 @@ gulp-rev-collector分支使用gulp-rev-collector
 
 为css、js文件添加hash，避免受上一版文件缓存的影响。
 ```
-"js/index.js": "js/index-e230776911.js"
+// 最终达成类似这样的效果
+"js/index.js" 变为 "js/index-e230776911.js"
 ```
 
 src文件夹内是若干目录，目录中是页面相关文件，libs文件夹中是公用文件。
