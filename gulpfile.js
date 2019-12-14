@@ -20,7 +20,7 @@ task('revision', (done) => {
   let folders = getFolders(sourcePath); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
-    return gulp.src([path.join(sourcePath, folder, '/**/*.{css,js}'), 'dist/libs/*.js', 'dist/libs/js/*.js', 'dist/libs/css/*.css'])
+    return gulp.src([path.join(sourcePath, folder, '/**/*.{css,js}')])
       .pipe(rev())
       .pipe(gulp.dest(sourcePath + `/${folder}`))
       .pipe(rev.manifest())
@@ -38,7 +38,14 @@ task('rewrite', (done) => {
       .pipe(revRewrite({ manifest }))
       .pipe(gulp.dest(sourcePath + `/${folder}`))
   });
-  return merge(tasks);
+
+  let hanleLibs = folders.map((folder) => {
+    const manifest = src(`dist/libs/rev-manifest.json`);
+    return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
+      .pipe(revRewrite({ manifest }))
+      .pipe(gulp.dest(sourcePath + `/${folder}`))
+  });
+  return merge(tasks , hanleLibs);
 });
 
 task('copy', () =>
