@@ -1,7 +1,7 @@
 # cleanBrowserCache
 **在windows下似乎无效，原因不明，macos正常**
-
-更换组件为gulp-rev-collector，依然无效。
+master分支使用gulp-rev-rewrite
+gulp-rev-collector分支使用gulp-rev-collector
 
 为css、js文件添加hash，避免受上一版文件缓存的影响。
 ```
