@@ -6,8 +6,23 @@ const del = require('del');
 const fs = require('fs');
 const path = require('path');
 const merge = require('merge-stream');
+const replace = require('gulp-replace');
 
-let sourcePath = 'dist';
+
+let sourcePath = 'dist-dev'; // dist-dev开发 dist-prod生产
+let ENV = 'dev'; // dev 开发 prod 生产
+let replaceCommonjs = 'var pro = false;'
+
+let set_env = (type) => {
+  ENV = type || 'dev';
+  if (type == 'dev') {
+    sourcePath = 'dist-dev';
+    replaceCommonjs = 'var pro = false;'
+  } else {
+    sourcePath = 'dist-prod'
+    replaceCommonjs = 'var pro = true;'
+  }
+}
 
 function getFolders(dir) {
   return fs.readdirSync(dir)
@@ -15,6 +30,27 @@ function getFolders(dir) {
       return fs.statSync(path.join(dir, file)).isDirectory();
     });
 }
+
+// 修改js文件，区分开发or生产
+gulp.task('replaceWords', () => {
+  return gulp.src(`./${sourcePath}/libs/common.js`)
+    .pipe(replace('var pro = false;', replaceCommonjs))
+    .pipe(replace('var pro = true;', replaceCommonjs))
+    .pipe(gulp.dest(`${sourcePath}/libs/`));
+});
+
+task('setDev', done => {
+  set_env('dev')
+  console.log(ENV);
+  console.log(sourcePath);
+  done()
+})
+task('setProd', done => {
+  set_env('prod')
+  console.log(ENV);
+  console.log(sourcePath);
+  done()
+})
 
 task('revision', (done) => {
   let folders = getFolders(sourcePath); // get folders
@@ -38,23 +74,31 @@ task('rewrite', (done) => {
       .pipe(revRewrite({ manifest }))
       .pipe(gulp.dest(sourcePath + `/${folder}`))
   });
+  return merge(tasks);
+});
 
+task('rewriteLibs', (done) => {
+  let folders = getFolders(sourcePath); // get folders
+  if (folders.length === 0) return done(); // nothing to do!
   let hanleLibs = folders.map((folder) => {
-    const manifest = src(`dist/libs/rev-manifest.json`);
+    const manifest = src(`${sourcePath}/libs/rev-manifest.json`);
     return gulp.src(path.join(sourcePath, folder, '/**/*.html'))
       .pipe(revRewrite({ manifest }))
       .pipe(gulp.dest(sourcePath + `/${folder}`))
   });
-  return merge(tasks , hanleLibs);
+  return merge(hanleLibs);
 });
 
 task('copy', () =>
   gulp.src('src/**/*')
-    .pipe(gulp.dest('dist')) // 将源文件拷贝到打包目录
+    .pipe(gulp.dest(`${sourcePath}`)) // 将源文件拷贝到打包目录
 );
 
 task('clean', () =>
-  del(['./dist/*'])
+  del([`./${sourcePath}`])
 );
 
 gulp.task('default', series('clean', 'copy', 'revision', 'rewrite'));
+
+gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'revision', 'rewrite', 'rewriteLibs'));
+gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'revision', 'rewrite', 'rewriteLibs'));
