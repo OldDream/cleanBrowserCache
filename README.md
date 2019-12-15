@@ -10,6 +10,8 @@ npm run build-dev 编译到测试环境
 ```
 
 为css、js文件添加hash，避免受上一版文件缓存的影响。
+
+含ES6转ES5、js压缩功能。
 ```
 // 最终达成类似这样的效果
 "js/index.js" 变为 "js/index-e230776911.js"
