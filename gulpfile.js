@@ -102,8 +102,8 @@ task('rewrite', (done) => {
   let folders = getFolders(sourceFolder); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
-    const manifestJS = src(`./${sourceFolder}/${folder}/'js-rev.json`);
-    const manifestCSS = src(`./${sourceFolder}/${folder}/'css-rev.json'`);
+    const manifestJS = src(`./${sourceFolder}/${folder}/js-rev.json`);
+    const manifestCSS = src(`./${sourceFolder}/${folder}/css-rev.json'`);
     return gulp.src(`./${sourceFolder}/${folder}/**/*.html`)
       .pipe(revRewrite({ manifest: manifestJS }))
       .pipe(revRewrite({ manifest: manifestCSS }))
