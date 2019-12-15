@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const { series, watch, task, dest, src } = require('gulp');
+const { series,parallel, watch, task, dest, src } = require('gulp');
 const rev = require('gulp-rev');
 const revRewrite = require('gulp-rev-rewrite');
 const del = require('del');
@@ -116,8 +116,8 @@ task('rewriteLibs', (done) => {
   let folders = getFolders(sourceFolder); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let hanleLibs = folders.map((folder) => {
-    const manifestJS = src(`./${sourceFolder}/${folder}/js-rev.json`);
-    const manifestCSS = src(`./${sourceFolder}/${folder}/css-rev.json'`);
+    const manifestJS = src(`./${sourceFolder}/libs/js-rev.json`);
+    const manifestCSS = src(`./${sourceFolder}/libs/css-rev.json`);
     return gulp.src(`./${sourceFolder}/${folder}/**/*.html`)
       .pipe(revRewrite({ manifest: manifestJS }))
       .pipe(revRewrite({ manifest: manifestCSS }))
@@ -137,5 +137,5 @@ task('clean', () =>
 
 gulp.task('default', series('clean', 'copy', 'revisionJS', 'revisionCSS', 'rewrite'));
 
-gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'revisionJS', 'revisionCSS', 'rewrite', 'rewriteLibs'));
-gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'revisionJS', 'revisionCSS', 'rewrite', 'rewriteLibs'));
+gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', parallel('revisionJS', 'revisionCSS'), 'rewrite', 'rewriteLibs'));
+gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', parallel('revisionJS', 'revisionCSS'), 'rewrite', 'rewriteLibs'));
