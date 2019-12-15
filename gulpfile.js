@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const { series,parallel, watch, task, dest, src } = require('gulp');
+const { series, parallel, watch, task, dest, src } = require('gulp');
 const rev = require('gulp-rev');
 const revRewrite = require('gulp-rev-rewrite');
 const del = require('del');
@@ -135,7 +135,8 @@ task('clean', () =>
   del([`./${sourceFolder}`])
 );
 
-gulp.task('default', series('clean', 'copy', 'revisionJS', 'revisionCSS', 'rewrite'));
 
 gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', parallel('revisionJS', 'revisionCSS'), 'rewrite', 'rewriteLibs'));
 gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', parallel('revisionJS', 'revisionCSS'), 'rewrite', 'rewriteLibs'));
+
+gulp.task('default', series('build-dev', 'build'));
