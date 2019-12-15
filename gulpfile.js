@@ -80,7 +80,7 @@ task('revisionJS', (done) => {
       .pipe(uglify())
       .pipe(sourcemaps.write('.'))
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest('js-rev.json'))
+      .pipe(rev.manifest({path:'js-rev.json'}))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
@@ -92,7 +92,7 @@ task('revisionCSS', (done) => {
     return gulp.src(`./${sourceFolder}/${folder}/**/*.css`)
       .pipe(rev())
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest('css-rev.json'))
+      .pipe(rev.manifest({path:'css-rev.json'}))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
