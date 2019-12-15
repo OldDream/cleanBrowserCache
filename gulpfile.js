@@ -80,7 +80,7 @@ task('revisionJS', (done) => {
       .pipe(uglify())
       .pipe(sourcemaps.write('.'))
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest())
+      .pipe(rev.manifest('js-rev.json'))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
@@ -92,7 +92,7 @@ task('revisionCSS', (done) => {
     return gulp.src(`./${sourceFolder}/${folder}/**/*.css`)
       .pipe(rev())
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest())
+      .pipe(rev.manifest('css-rev.json'))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
@@ -102,9 +102,11 @@ task('rewrite', (done) => {
   let folders = getFolders(sourceFolder); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
-    const manifest = src(`./${sourceFolder}/${folder}/rev-manifest.json`);
+    const manifestJS = src(`./${sourceFolder}/${folder}/'js-rev.json`);
+    const manifestCSS = src(`./${sourceFolder}/${folder}/'css-rev.json'`);
     return gulp.src(`./${sourceFolder}/${folder}/**/*.html`)
-      .pipe(revRewrite({ manifest }))
+      .pipe(revRewrite({ manifest: manifestJS }))
+      .pipe(revRewrite({ manifest: manifestCSS }))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
