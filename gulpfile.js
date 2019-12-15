@@ -80,7 +80,7 @@ task('revisionJS', (done) => {
       .pipe(uglify())
       .pipe(sourcemaps.write('.'))
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest({path:'js-rev.json'}))
+      .pipe(rev.manifest({ path: 'js-rev.json' }))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
@@ -92,7 +92,7 @@ task('revisionCSS', (done) => {
     return gulp.src(`./${sourceFolder}/${folder}/**/*.css`)
       .pipe(rev())
       .pipe(dest(`./${sourceFolder}/${folder}`))
-      .pipe(rev.manifest({path:'css-rev.json'}))
+      .pipe(rev.manifest({ path: 'css-rev.json' }))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(tasks);
@@ -103,7 +103,7 @@ task('rewrite', (done) => {
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
     const manifestJS = src(`./${sourceFolder}/${folder}/js-rev.json`);
-    const manifestCSS = src(`./${sourceFolder}/${folder}/css-rev.json'`);
+    const manifestCSS = src(`./${sourceFolder}/${folder}/css-rev.json`);
     return gulp.src(`./${sourceFolder}/${folder}/**/*.html`)
       .pipe(revRewrite({ manifest: manifestJS }))
       .pipe(revRewrite({ manifest: manifestCSS }))
@@ -116,9 +116,11 @@ task('rewriteLibs', (done) => {
   let folders = getFolders(sourceFolder); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let hanleLibs = folders.map((folder) => {
-    const manifest = src(`./${sourceFolder}/libs/rev-manifest.json`);
+    const manifestJS = src(`./${sourceFolder}/${folder}/js-rev.json`);
+    const manifestCSS = src(`./${sourceFolder}/${folder}/css-rev.json'`);
     return gulp.src(`./${sourceFolder}/${folder}/**/*.html`)
-      .pipe(revRewrite({ manifest }))
+      .pipe(revRewrite({ manifest: manifestJS }))
+      .pipe(revRewrite({ manifest: manifestCSS }))
       .pipe(dest(`./${sourceFolder}/${folder}`))
   });
   return merge(hanleLibs);
