@@ -66,11 +66,30 @@ gulp.task('toES5min', () =>
     .pipe(dest(`./${sourceFolder}`))
 );
 
-task('revision', (done) => {
+task('revisionJS', (done) => {
   let folders = getFolders(sourceFolder); // get folders
   if (folders.length === 0) return done(); // nothing to do!
   let tasks = folders.map((folder) => {
-    return gulp.src(`./${sourceFolder}/${folder}/**/*.{css,js}`)
+    return gulp.src(`./${sourceFolder}/${folder}/**/*.js`)
+      .pipe(rev())
+      .pipe(dest(`./${sourceFolder}/${folder}`))
+      .pipe(sourcemaps.init())
+      .pipe(babel({
+        presets: ['@babel/env']
+      }))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('.'))
+      .pipe(dest(`./${sourceFolder}/${folder}`))
+      .pipe(rev.manifest())
+      .pipe(dest(`./${sourceFolder}/${folder}`))
+  });
+  return merge(tasks);
+});
+task('revisionCSS', (done) => {
+  let folders = getFolders(sourceFolder); // get folders
+  if (folders.length === 0) return done(); // nothing to do!
+  let tasks = folders.map((folder) => {
+    return gulp.src(`./${sourceFolder}/${folder}/**/*.css`)
       .pipe(rev())
       .pipe(dest(`./${sourceFolder}/${folder}`))
       .pipe(rev.manifest())
@@ -112,7 +131,7 @@ task('clean', () =>
   del([`./${sourceFolder}`])
 );
 
-gulp.task('default', series('clean', 'copy', 'revision', 'rewrite'));
+gulp.task('default', series('clean', 'copy', 'revisionJS', 'revisionCSS', 'rewrite'));
 
-gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'toES5min', 'revision', 'rewrite', 'rewriteLibs'));
-gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'toES5min', 'revision', 'rewrite', 'rewriteLibs'));
+gulp.task('build-dev', series('setDev', 'clean', 'copy', 'replaceWords', 'revisionJS', 'revisionCSS', 'rewrite', 'rewriteLibs'));
+gulp.task('build', series('setProd', 'clean', 'copy', 'replaceWords', 'revisionJS', 'revisionCSS', 'rewrite', 'rewriteLibs'));
